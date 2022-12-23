@@ -1,6 +1,6 @@
+// require('dotenv').config()
 import Head from "next/head";
 import { Inter } from "@next/font/google";
-import styles from "../styles/Home.module.css";
 import Header from "../components/Header";
 import Hero from "../components/Hero";
 import About from "../components/About";
@@ -8,7 +8,20 @@ import Skills from "../components/Skills";
 import Projects from "../components/Projects";
 import Contact from "../components/Contact";
 import Link from "next/link";
+import { GetStaticProps } from "next";
+import { PageInfo, Project, Skill, Social } from "../typings";
+import { fetchSkills } from "../utils/fetchSkill";
+import { fetchPageInfo } from "../utils/fetchPageInfo";
+import { fetchProject } from "../utils/fetchProjects";
+import { fetchSocial } from "../utils/fetchSocials";
 const inter = Inter({ subsets: ["latin"] });
+
+type Props = {
+  pageInfo : PageInfo,
+  skills : Skill[],
+  projects : Project[],
+  socials : Social[]
+}
 
 export default function Home() {
   return (
@@ -59,3 +72,19 @@ export default function Home() {
     </div>
   );
 }
+
+// export const getStaticProps :GetStaticProps<Props> = async() => {
+//   const pageInfo : PageInfo = await fetchPageInfo();
+//   const projects : Project[] = await fetchProject();
+//   const skills : Skill[] = await fetchSkills();
+//   const socials : Social[] = await fetchSocial();
+//   return {
+//     props : {
+//       pageInfo,
+//       projects,
+//       skills,
+//       socials
+//     },
+//     validator : 10
+//   }
+// }
