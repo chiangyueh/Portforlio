@@ -1,7 +1,12 @@
-import React from 'react'
+import React,{FC} from 'react'
 import {motion} from "framer-motion"
-import Skill from './Skill'
-const Skills = () => {
+import SkillComponent from './Skill'
+import { Skill } from '../typings'
+
+interface Props{
+  skills : Skill[]
+}
+const Skills:FC<Props> = ({skills}) => {
   return (
     <motion.div 
     initial={{opacity:0}}
@@ -18,16 +23,12 @@ const Skills = () => {
         </h3>
 
         <div className='grid grid-cols-4 gap-5'>
-        <Skill/>
-        <Skill/>
-        <Skill/>
-        <Skill/>
-        <Skill/>
-        <Skill/>
-        <Skill/>
-        <Skill/>
-        <Skill/>
-        <Skill/>
+          {skills.slice(0 , skills.length/2).map(skill=>(
+            <SkillComponent key={skill._id} skill={skill}/>
+          ))}
+          {skills.slice(skills.length/2, skills.length).map(skill=>(
+            <SkillComponent key={skill._id} skill={skill} directionLeft/>
+          ))}
         </div>
     </motion.div>
   )

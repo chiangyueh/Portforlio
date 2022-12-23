@@ -23,7 +23,7 @@ type Props = {
   socials : Social[]
 }
 
-export default function Home() {
+export default function Home({pageInfo,skills,projects,socials} : Props) {
   return (
     <div
       className="bg-[rgb(36,36,36)] text-white h-screen snap-y snap-mandatory 
@@ -36,22 +36,22 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <Header />
+      <Header socials={socials}/>
 
       <section id="hero" className="snap-start">
-        <Hero />
+        <Hero pageInfo={pageInfo}/>
       </section>
 
       <section id="about" className="snap-center">
-        <About />
+        <About pageInfo={pageInfo}/>
       </section>
 
       <section id="skills" className="snap-start">
-        <Skills />
+        <Skills skills={skills}/>
       </section>
 
       <section id="projects" className="snap-start">
-        <Projects />
+        <Projects projects={projects}/>
       </section>
 
       <section id="contact" className="snap-start">
@@ -73,18 +73,19 @@ export default function Home() {
   );
 }
 
-// export const getStaticProps :GetStaticProps<Props> = async() => {
-//   const pageInfo : PageInfo = await fetchPageInfo();
-//   const projects : Project[] = await fetchProject();
-//   const skills : Skill[] = await fetchSkills();
-//   const socials : Social[] = await fetchSocial();
-//   return {
-//     props : {
-//       pageInfo,
-//       projects,
-//       skills,
-//       socials
-//     },
-//     validator : 10
-//   }
-// }
+export const getStaticProps :GetStaticProps<Props> = async() => {
+  const pageInfo : PageInfo = await fetchPageInfo() || null;
+  const projects : Project[] = await fetchProject() || null;
+  const skills : Skill[] = await fetchSkills() || null;
+  const socials : Social[] = await fetchSocial() || null;
+  
+  return {
+    props : {
+      pageInfo,
+      projects,
+      skills,
+      socials
+    },
+    // validator : 10
+  }
+}

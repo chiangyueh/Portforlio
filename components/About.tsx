@@ -1,6 +1,11 @@
-import React from 'react'
+import React,{FC} from 'react'
 import {motion} from 'framer-motion'
-const About = () => {
+import { PageInfo } from "../typings";
+import { urlFor } from "../sanity";
+interface Props{
+  pageInfo: PageInfo
+}
+const About:FC<Props> = ({pageInfo}) => {
   return (
     <motion.div 
     initial={{opacity:0}}
@@ -24,21 +29,21 @@ const About = () => {
           viewport={{
             once:true
           }}
-        	src="/me.jpg"
+        	src={urlFor(pageInfo.profilePic).url()}
           className='-mb-20 md:mb-0 flex-shrink-0 w-56 h-56 rounded-full
           md:rounded-lg md:w-64 md:h-96 xl:w-[500px] xl:h-[600px]'
         />
 
         <div className='space-y-10 px-0 md:px-10'>
           <h4 className='text-4xl font-semibold'>
-            Here is a{' '} 
+            我是{' '} 
           <span className='underline decoration-[#F7Ab0A]/50'>
-            little 
+            蔣岳 
           </span>{' '}
-           background</h4>
-           <p className='text-sm'>
-            eafafjgilrjgikfsgjiorjgskj
-           </p>
+           歡迎你來到我的網站</h4>
+           <span className='text-sm'>
+            {pageInfo.backgroundInformation}
+           </span>
         </div>
     </motion.div>
   )
