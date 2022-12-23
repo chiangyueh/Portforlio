@@ -4,6 +4,8 @@ interface Props {
     directionLeft? : boolean
 }
 const Skill: FC<Props>= (props) => {
+    const random = Math.random()
+    const xrandom = 800* random;
   return (
     <div className="group relative flex cursor-pointer">
         <motion.img
