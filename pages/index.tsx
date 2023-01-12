@@ -86,6 +86,5 @@ export const getStaticProps :GetStaticProps<Props> = async() => {
       skills,
       socials
     },
-    // validator : 10
   }
 }
